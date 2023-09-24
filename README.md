@@ -36,6 +36,8 @@ TiktokDL(tiktok_url).then((result) => {
 ### Tiktok Profile
 
 ```js
+const { TiktokStalk } = require("@tobyg74/tiktok-api-dl")
+
 
 const cookieString ='' +
   'tt_csrf_token=MY_TT_TOKEN;' +
@@ -43,8 +45,6 @@ const cookieString ='' +
   ' store-country-code=id;' +
   ' tt-target-idc=alisg;'
 
-
-const { TiktokStalk } = require("@tobyg74/tiktok-api-dl")
 
 const username = "tobz2k19"
 
@@ -56,13 +56,12 @@ TiktokStalk(username,cookieString).then((result) => {
 or 
 
 ```js
+const { TiktokStalk } = require("@tobyg74/tiktok-api-dl")
 
 const cookie = {
   tt_csrf_token: 'XXXXXXXXXXX',
   tt_chain_token: 'XXXXXXXXXXX',
 }
-
-const { TiktokStalk } = require("@tobyg74/tiktok-api-dl")
 
 const username = "tobz2k19"
 
@@ -74,13 +73,13 @@ TiktokStalk(username,cookie).then((result) => {
 ### Set Custom user agent 
 
 ```js
+const { TiktokStalk } = require("@tobyg74/tiktok-api-dl")
 
 const cookie = {
   tt_csrf_token: 'XXXXXXXXXXX',
   tt_chain_token: 'XXXXXXXXXXX',
 }
 
-const { TiktokStalk } = require("@tobyg74/tiktok-api-dl")
 
 const username = "tobz2k19"
 userAgent =  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"

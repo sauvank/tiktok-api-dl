@@ -1,6 +1,6 @@
 {
   "name": "@lucas_monroe/tiktok-api-dl",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "[fork TobyG74/tiktok-api-dl] Scrapper for download Video, Image, Music from Tiktok",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

@@ -1,7 +1,7 @@
 {
-  "name": "@tobyg74/tiktok-api-dl",
-  "version": "1.0.5-a",
-  "description": "Scrapper for download Video, Image, Music from Tiktok",
+  "name": "@lucas_monroe/tiktok-api-dl",
+  "version": "1.0.0",
+  "description": "[fork TobyG74/tiktok-api-dl] Scrapper for download Video, Image, Music from Tiktok",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TobyG74/tiktok-api-dl.git"
+    "url": "git+https://github.com/sauvank/tiktok-api-dl"
   },
   "keywords": [
     "tiktok-api",
@@ -26,9 +26,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TobyG74/tiktok-api-dl/issues"
+    "url": "https://github.com/sauvank/tiktok-api-dl/issues"
   },
-  "homepage": "https://github.com/TobyG74/tiktok-api-dl#readme",
+  "homepage": "https://github.com/sauvank/tiktok-api-dl#readme",
   "dependencies": {
     "axios": "^1.3.4",
     "cheerio": "^1.0.0-rc.12"

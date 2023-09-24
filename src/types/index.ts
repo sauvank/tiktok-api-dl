@@ -39,7 +39,8 @@ export interface StalkResult {
   message?: string
   result?: {
     users: Users
-    stats: Stats
+    stats: Stats,
+    videos: VideoInfo
   }
 }
 
@@ -58,4 +59,89 @@ export interface Stats {
   heartCount: number
   videoCount: number
   likeCount: number
+}
+
+export interface VideoInfo {
+  id: string;
+  desc: string;
+  createTime: string;
+  scheduleTime: number;
+  video: {
+    id: string;
+    height: number;
+    width: number;
+    duration: number;
+    ratio: string;
+    cover: string;
+    originCover: string;
+    dynamicCover: string;
+    playAddr: string;
+    downloadAddr: string;
+    shareCover: string[];
+    reflowCover: string;
+    bitrate: number;
+    encodedType: string;
+    format: string;
+    videoQuality: string;
+    encodeUserTag: string;
+    codecType: string;
+    definition: string;
+    subtitleInfos: any[];
+    zoomCover: any;
+    volumeInfo: any;
+    bitrateInfo: number[];
+  };
+  author: string;
+  music: {
+    id: string;
+    title: string;
+    playUrl: string;
+    coverLarge: string;
+    coverMedium: string;
+    coverThumb: string;
+    authorName: string;
+    original: boolean;
+    duration: number;
+    album: string;
+    scheduleSearchTime: number;
+    collected: boolean;
+    preciseDuration: any;
+  };
+  challenges: any[][];
+  stats: {
+    diggCount: number;
+    shareCount: number;
+    commentCount: number;
+    playCount: number;
+    collectCount: string;
+  };
+  warnInfo: any[];
+  originalItem: boolean;
+  officalItem: boolean;
+  textExtra: any[][];
+  secret: boolean;
+  forFriend: boolean;
+  digged: boolean;
+  itemCommentStatus: number;
+  takeDown: number;
+  effectStickers: any[];
+  privateItem: boolean;
+  stickersOnItem: any[];
+  shareEnabled: boolean;
+  comments: any[];
+  duetDisplay: number;
+  stitchDisplay: number;
+  indexEnabled: boolean;
+  locationCreated: string;
+  contents: any[][];
+  collected: boolean;
+  channelTags: any[];
+  nickname: string;
+  authorId: string;
+  authorSecId: string;
+  avatarThumb: string;
+  downloadSetting: number;
+  authorPrivate: boolean;
+  capcutAnchorsOriginal: any[];
+  capcutAnchors: any[];
 }

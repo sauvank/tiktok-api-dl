@@ -1,6 +1,6 @@
 import axios from "axios"
 import { load } from "cheerio"
-import { Author, DLResult, StalkResult, Statistics, Stats, Users } from "../types"
+import { Author, DLResult, StalkResult, Statistics, Stats, Users, VideoInfo } from "../types"
 
 const _tiktokurl: string = "https://www.tiktok.com"
 const _tiktokapi = (id: string): string => `https://api16-core.tiktokv.com/aweme/v1/feed/?aweme_id=${id}&openudid=vi8vz5c5aec5wllw&uuid=7661132520610792&_rticket=1694319262046&ts=1694319262&device_platform=android&channel=googleplay&ac=wifi`
@@ -81,53 +81,63 @@ export const TiktokDL = (url: string): Promise<DLResult> =>
       .catch((e) => reject(e))
   })
 
-export const TiktokStalk = (username: string): Promise<StalkResult> =>
+export const TiktokStalk = (username: string, cookie: string|{tt_csrf_token: string, tt_chain_token:string}, userAgent?:string): Promise<StalkResult> =>
   new Promise((resolve, reject) => {
-    axios
-      .get("https://pastebin.com/raw/ELJjcbZT")
-      .then(({ data: cookie }) => {
-        username = username.replace("@", "")
-        axios
-          .get(`${_tiktokurl}/@${username}`, {
-            headers: {
-              "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",
-              cookie: cookie
-            }
-          })
-          .then(({ data }) => {
-            const $ = load(data)
-            const result = JSON.parse($("script#SIGI_STATE").text())
-            if (!result.UserModule) {
-              return resolve({
-                status: "error",
-                message: "User not found!"
-              })
-            }
-            const user = result.UserModule
-            const users: Users = {
-              username: user.users[username].uniqueId,
-              nickname: user.users[username].nickname,
-              avatar: user.users[username].avatarLarger,
-              signature: user.users[username].signature,
-              verified: user.users[username].verified,
-              region: user.users[username].region
-            }
-            const stats: Stats = {
-              followerCount: user.stats[username].followerCount,
-              followingCount: user.stats[username].followingCount,
-              heartCount: user.stats[username].heartCount,
-              videoCount: user.stats[username].videoCount,
-              likeCount: user.stats[username].diggCount
-            }
-            resolve({
-              status: "success",
-              result: {
-                users,
-                stats
-              }
-            })
-          })
-          .catch((e) => resolve({ status: "error", message: e.message }))
-      })
-      .catch((e) => reject(e))
+    userAgent = typeof userAgent === "string" ? userAgent : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
+
+    let  cookieValue = cookie;
+
+    if (cookie.hasOwnProperty('tt_csrf_token') && cookie.hasOwnProperty('tt_chain_token')){
+      cookieValue = `tt_csrf_token=${cookie['tt_csrf_token']};` +
+        ` tt_chain_token=${cookie['tt_chain_token']};` +
+        ' store-country-code=id;' +
+        ' tt-target-idc=alisg;'
+    }
+
+    username = username.replace("@", "")
+
+    callUrl(resolve, reject,username, userAgent,cookieValue);
+
   })
+
+
+//TODO OPTMISE THIS
+ function callUrl(resolve, reject, username, userAgent,cookieValue){
+  axios
+    .get(`${_tiktokurl}/@${username}`, {
+      headers: {
+        "user-agent": userAgent,
+        cookie: cookieValue.toString()
+      }
+    })
+    .then(({ data }) => {
+      const $ = load(data)
+      let result;
+      try {
+         result = JSON.parse($("script#SIGI_STATE").text())
+      }catch (e){
+        return callUrl(resolve, reject, username, userAgent,cookieValue)
+      }
+
+      if (!result.UserModule) {
+        return resolve({
+          status: "error",
+          message: "User not found!"
+        })
+      }
+      const user = result.UserModule
+      const users: Users = user.users[username];
+      const stats: Stats = user.stats[username];
+      const videos: VideoInfo = result.ItemModule;
+
+      resolve({
+        status: "success",
+        result: {
+          users,
+          stats,
+          videos
+        }
+      })
+    })
+    .catch((e) => reject(e))
+}

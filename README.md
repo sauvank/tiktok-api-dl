@@ -5,18 +5,18 @@
 
 ## Installation
 
-- @tobyg74/tiktok-api-dl requires Node.js v10+ to run.
+- @lucas_monroe/tiktok-api-dl requires Node.js v10+ to run.
 
 ### Install from NPM
 
 ```
-npm install @tobyg74/tiktok-api-dl
+npm install @lucas_monroe/tiktok-api-dl
 ```
 
 ### Install from YARN
 
 ```
-yarn add @tobyg74/tiktok-api-dl
+yarn add @lucas_monroe/tiktok-api-dl
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ yarn add @tobyg74/tiktok-api-dl
 ### Tiktok Downloader
 
 ```js
-const { TiktokDL } = require("@tobyg74/tiktok-api-dl")
+const { TiktokDL } = require("@lucas_monroe/tiktok-api-dl")
 
 const tiktok_url = "https://vt.tiktok.com/ZS84BnrU9"
 

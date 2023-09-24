@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sauvank/tiktok-api-dl"
+    "url": "git+https://github.com/sauvank/tiktok-api-dl.git"
   },
   "keywords": [
     "tiktok-api",
